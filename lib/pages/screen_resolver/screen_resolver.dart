@@ -1,14 +1,14 @@
+import 'package:clean_app/cubit/navigation_cubit/navigation_cubit.dart';
+import 'package:clean_app/cubit/navigation_cubit/navigation_state.dart';
+import 'package:clean_app/enums/navigation_screens_enum.dart';
+import 'package:clean_app/pages/bloc_builder/bloc_builder_page.dart';
+import 'package:clean_app/pages/home_page/home_page.dart';
+import 'package:clean_app/pages/justStatefulWidgetPage/just_stateful_widget_page.dart';
+import 'package:clean_app/pages/list_view_page/list_view_page.dart';
+import 'package:clean_app/pages/sized_box_page/sized_box_page.dart';
+import 'package:clean_app/pages/stateful_widget_page/stateful_widget_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unclean_app/cubit/navigation_cubit/navigation_cubit.dart';
-import 'package:unclean_app/cubit/navigation_cubit/navigation_state.dart';
-import 'package:unclean_app/enums/navigation_screens_enum.dart';
-import 'package:unclean_app/pages/bloc_builder/bloc_builder_page.dart';
-import 'package:unclean_app/pages/home_page/home_page.dart';
-import 'package:unclean_app/pages/justStatefulWidgetPage/just_stateful_widget_page.dart';
-import 'package:unclean_app/pages/list_view_page/list_view_page.dart';
-import 'package:unclean_app/pages/sized_box_page/sized_box_page.dart';
-import 'package:unclean_app/pages/stateful_widget_page/stateful_widget_page.dart';
 
 class ScreenResolver extends StatefulWidget {
   const ScreenResolver({Key? key}) : super(key: key);
@@ -40,15 +40,15 @@ class _ScreenResolverState extends State<ScreenResolver> {
         builder: (BuildContext context, NavigationState state) {
           if (state.currentScreen == NavigationScreens.home) {
             return const HomePage();
-          } else if (state.currentScreen == NavigationScreens.listView) {
-            return const ListViewPage();
-          } else if (state.currentScreen == NavigationScreens.statefulWidget) {
-            return const SatefulWidgetPage();
-          } else if (state.currentScreen == NavigationScreens.blocBuilder) {
-            return const BlocBuilderPage();
-          } else if (state.currentScreen == NavigationScreens.sizedBox) {
+          } else if (state.currentScreen == NavigationScreens.listViewBuilder) {
+            return const ListViewBuilderPage();
+          } else if (state.currentScreen == NavigationScreens.statelessWidget) {
+            return const StatelessWidgetPage();
+          } else if (state.currentScreen == NavigationScreens.blocListener) {
+            return const BlocListenerPage();
+          } else if (state.currentScreen == NavigationScreens.container) {
             return SizedBoxPage();
-          } else if (state.currentScreen == NavigationScreens.justStatefulWidget) {
+          } else if (state.currentScreen == NavigationScreens.blocWithStatefulWidget) {
             return const JustStatefulWidgetPage();
           } else {
             return InkWell(

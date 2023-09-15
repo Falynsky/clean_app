@@ -1,8 +1,8 @@
+import 'package:clean_app/cubit/navigation_cubit/navigation_cubit.dart';
+import 'package:clean_app/enums/navigation_screens_enum.dart';
+import 'package:clean_app/utils/stopwatch_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unclean_app/cubit/navigation_cubit/navigation_cubit.dart';
-import 'package:unclean_app/enums/navigation_screens_enum.dart';
-import 'package:unclean_app/utils/stopwatch_utils.dart';
 
 class SizedBoxPage extends StatefulWidget {
   @override
@@ -31,10 +31,11 @@ class _SizedBoxPageState extends State<SizedBoxPage> {
       body: WillPopScope(
         onWillPop: onWillPop,
         child: SingleChildScrollView(
-          child: Column(children: <Widget>[
-            for (int i = 0; i < 1000; i++)
-              i % 2 == 0 ? const SizedBox(height: 10) : const Text('test'),
-          ],),
+          child: Column(
+            children: <Widget>[
+              for (int i = 0; i < 1000; i++) i % 2 == 0 ? const SizedBox(height: 10) : const Text('test'),
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,4 @@
-# unclean_app
+# clean_app
 
 A new Flutter project.
 

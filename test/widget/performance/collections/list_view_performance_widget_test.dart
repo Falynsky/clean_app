@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:unclean_app/configs/transaction.dart';
-import 'package:unclean_app/http/services/transactions/transaction_service.dart';
-import 'package:unclean_app/pages/list_view_page/list_view_card.dart';
-import 'package:unclean_app/utils/stopwatch_utils.dart';
+import 'package:clean_app/configs/transaction.dart';
+import 'package:clean_app/http/services/transactions/transaction_service.dart';
+import 'package:clean_app/pages/list_view_page/list_view_card.dart';
+import 'package:clean_app/utils/stopwatch_utils.dart';
 
 void main() {
   final List<String> bigItems = <String>[];

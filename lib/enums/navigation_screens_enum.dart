@@ -1,8 +1,10 @@
 enum NavigationScreens {
   home,
-  listView,
-  statefulWidget,
-  blocBuilder,
-  sizedBox,
-  justStatefulWidget,
+  listViewBuilder,
+  statelessWidget,
+  blocListener,
+  container,
+  paddings,
+  blocWithStatefulWidget,
+  provider,
 }

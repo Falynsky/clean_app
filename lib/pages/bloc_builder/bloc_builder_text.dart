@@ -1,7 +1,7 @@
+import 'package:clean_app/bloc/bloc_builder_bloc/bloc_builder_bloc.dart';
+import 'package:clean_app/utils/widget_build_counter_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unclean_app/bloc/bloc_builder_bloc/bloc_builder_bloc.dart';
-import 'package:unclean_app/utils/widget_build_counter_utils.dart';
 
 class BlocBuilderText extends StatefulWidget {
   @override
@@ -17,13 +17,14 @@ class _BlocBuilderTextState extends State<BlocBuilderText> {
 
   @override
   Widget build(BuildContext context) {
-    final BlocBuilderBloc blocBuilderBloc = context.read<BlocBuilderBloc>();
+    final BlocListenerBloc blocBuilderBloc = context.read<BlocListenerBloc>();
     WidgetBuildCounterUtils().add(key: 'bloc_builder_text');
     WidgetBuildCounterUtils().get(key: 'bloc_builder_text');
     return Column(
       children: <Widget>[
-        Text(DateTime.now()
-            .toString(),), //ten widget powinien sie odsiwezyc tylko jak bedzie zatrzymany stiper lub zerowany
+        Text(
+          DateTime.now().toString(),
+        ), //ten widget powinien sie odsiwezyc tylko jak bedzie zatrzymany stiper lub zerowany
         Text(blocBuilderBloc.state.counter.toString()),
       ],
     );

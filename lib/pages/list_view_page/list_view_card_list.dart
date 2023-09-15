@@ -1,21 +1,20 @@
+import 'package:clean_app/bloc/list_view_bloc/list_view_bloc.dart';
+import 'package:clean_app/cubit/navigation_cubit/navigation_cubit.dart';
+import 'package:clean_app/enums/navigation_screens_enum.dart';
+import 'package:clean_app/pages/list_view_page/list_view_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unclean_app/bloc/list_view_bloc/list_view_bloc.dart';
-import 'package:unclean_app/configs/transaction.dart';
-import 'package:unclean_app/cubit/navigation_cubit/navigation_cubit.dart';
-import 'package:unclean_app/enums/navigation_screens_enum.dart';
-import 'package:unclean_app/pages/list_view_page/list_view_card.dart';
 
-class ListViewCardList extends StatefulWidget {
+class ListViewBuilderCardList extends StatefulWidget {
   final ScrollController scrollController;
 
-  const ListViewCardList({required this.scrollController, Key? key}) : super(key: key);
+  const ListViewBuilderCardList({required this.scrollController, Key? key}) : super(key: key);
 
   @override
-  State<ListViewCardList> createState() => _ListViewCardListState();
+  State<ListViewBuilderCardList> createState() => _ListViewBuilderCardListState();
 }
 
-class _ListViewCardListState extends State<ListViewCardList> {
+class _ListViewBuilderCardListState extends State<ListViewBuilderCardList> {
   late NavigationCubit navigationCubit;
   late final TransactionsBloc transactionsBloc;
   late final ScrollController scrollController;
@@ -38,15 +37,16 @@ class _ListViewCardListState extends State<ListViewCardList> {
             child: const Text('Loaded transactions'),
           ),
           Expanded(
-            child: ListView(
+            child: ListView.builder(
+              itemCount: transactionsBloc.transactions.length,
               controller: scrollController,
-              children: transactionsBloc.transactions.map((Transaction transaction) {
+              itemBuilder: (BuildContext context, int index) {
                 return Container(
                   child: ListViewCard(
-                    transaction: transaction,
+                    transaction: transactionsBloc.transactions[index],
                   ),
                 );
-              }).toList(),
+              },
             ),
           ),
         ],

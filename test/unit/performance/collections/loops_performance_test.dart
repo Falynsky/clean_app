@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:unclean_app/utils/stopwatch_utils.dart';
+import 'package:clean_app/utils/stopwatch_utils.dart';
 
 // ignore_for_file: unused_local_variable
 void main() {

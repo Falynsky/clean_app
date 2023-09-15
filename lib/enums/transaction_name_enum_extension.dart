@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:unclean_app/enums/transaction_name_enum.dart';
+import 'package:clean_app/enums/transaction_name_enum.dart';
 
 extension TransactionNameExtension on TransactionName {
   static String getRandomTransactionName() {

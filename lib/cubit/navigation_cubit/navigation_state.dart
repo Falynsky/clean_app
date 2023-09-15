@@ -1,5 +1,5 @@
+import 'package:clean_app/enums/navigation_screens_enum.dart';
 import 'package:equatable/equatable.dart';
-import 'package:unclean_app/enums/navigation_screens_enum.dart';
 
 class NavigationState extends Equatable {
   final NavigationScreens currentScreen;

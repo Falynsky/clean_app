@@ -1,25 +1,25 @@
+import 'package:clean_app/bloc/bloc_builder_bloc/bloc_builder_bloc.dart';
+import 'package:clean_app/bloc/bloc_builder_bloc/bloc_builder_event.dart';
+import 'package:clean_app/pages/bloc_builder/bloc_builder_text.dart';
+import 'package:clean_app/utils/stopwatch_utils.dart';
+import 'package:clean_app/utils/widget_build_counter_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unclean_app/bloc/bloc_builder_bloc/bloc_builder_bloc.dart';
-import 'package:unclean_app/bloc/bloc_builder_bloc/bloc_builder_event.dart';
-import 'package:unclean_app/pages/bloc_builder/bloc_builder_text.dart';
-import 'package:unclean_app/utils/stopwatch_utils.dart';
-import 'package:unclean_app/utils/widget_build_counter_utils.dart';
 
-class BlocBuilderCounterContent extends StatefulWidget {
+class BlocListenerCounterContent extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _BlocBuilderCounterContentState();
+  State<StatefulWidget> createState() => _BlocListenerCounterContentState();
 }
 
-class _BlocBuilderCounterContentState extends State<BlocBuilderCounterContent> {
-  late final BlocBuilderBloc blocBuilderBloc;
+class _BlocListenerCounterContentState extends State<BlocListenerCounterContent> {
+  late final BlocListenerBloc blocBuilderBloc;
   @override
   void initState() {
     super.initState();
-    blocBuilderBloc = context.read<BlocBuilderBloc>();
-    StopwatchUtils().start(key: 'bloc_builder_counter_content');
+    blocBuilderBloc = context.read<BlocListenerBloc>();
+    StopwatchUtils().start(key: 'bloc_listener_counter_content');
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      StopwatchUtils().stop(key: 'bloc_builder_counter_content');
+      StopwatchUtils().stop(key: 'bloc_listener_counter_content');
     });
   }
 
@@ -32,7 +32,7 @@ class _BlocBuilderCounterContentState extends State<BlocBuilderCounterContent> {
             children: <Widget>[
               ElevatedButton(
                 onPressed: () {
-                  StopwatchUtils().start(key: 'bloc_builder_counter_content');
+                  StopwatchUtils().start(key: 'bloc_listener_counter_content');
                   blocBuilderBloc.add(StartTimer());
                 },
                 child: const Text('Włącz stoper'),
@@ -41,7 +41,7 @@ class _BlocBuilderCounterContentState extends State<BlocBuilderCounterContent> {
                 onPressed: () {
                   blocBuilderBloc.add(StopTimer());
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    StopwatchUtils().stop(key: 'bloc_builder_counter_content');
+                    StopwatchUtils().stop(key: 'bloc_listener_counter_content');
                   });
                 },
                 child: const Text('Wyłącz stoper i wyswietl'),
@@ -49,7 +49,7 @@ class _BlocBuilderCounterContentState extends State<BlocBuilderCounterContent> {
               ElevatedButton(
                 onPressed: () {
                   blocBuilderBloc.add(ResetTimer());
-                  WidgetBuildCounterUtils().stop(key: 'bloc_builder_text');
+                  WidgetBuildCounterUtils().stop(key: 'bloc_listener_text');
                 },
                 child: const Text('Reset'),
               ),

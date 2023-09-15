@@ -1,17 +1,16 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class BlocBuilderState extends Equatable {
+class BlocListenerState extends Equatable {
   final int counter;
   final bool isTimerActive;
-  const BlocBuilderState(this.counter, this.isTimerActive);
+  const BlocListenerState(this.counter, this.isTimerActive);
 
-//copyWith
-  BlocBuilderState copyWith({
+  BlocListenerState copyWith({
     int? counter,
     bool? isTimerActive,
   }) {
-    return BlocBuilderState(
+    return BlocListenerState(
       counter ?? this.counter,
       isTimerActive ?? this.isTimerActive,
     );

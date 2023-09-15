@@ -1,7 +1,7 @@
+import 'package:clean_app/configs/transaction.dart';
+import 'package:clean_app/dialogs/transaction_preview.dart';
+import 'package:clean_app/utils/stopwatch_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:unclean_app/configs/transaction.dart';
-import 'package:unclean_app/dialogs/transaction_preview.dart';
-import 'package:unclean_app/utils/stopwatch_utils.dart';
 
 class ListViewCard extends StatefulWidget {
   final Transaction transaction;

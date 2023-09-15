@@ -1,48 +1,52 @@
+import 'package:clean_app/bloc/bloc_builder_bloc/bloc_builder_bloc.dart';
+import 'package:clean_app/bloc/bloc_builder_bloc/bloc_builder_state.dart';
+import 'package:clean_app/cubit/navigation_cubit/navigation_cubit.dart';
+import 'package:clean_app/enums/navigation_screens_enum.dart';
+import 'package:clean_app/pages/bloc_builder/bloc_builder_counter_content.dart';
+import 'package:clean_app/utils/stopwatch_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unclean_app/bloc/bloc_builder_bloc/bloc_builder_bloc.dart';
-import 'package:unclean_app/bloc/bloc_builder_bloc/bloc_builder_state.dart';
-import 'package:unclean_app/cubit/navigation_cubit/navigation_cubit.dart';
-import 'package:unclean_app/enums/navigation_screens_enum.dart';
-import 'package:unclean_app/pages/bloc_builder/bloc_builder_counter_content.dart';
-import 'package:unclean_app/utils/stopwatch_utils.dart';
 
-class BlocBuilderPage extends StatefulWidget {
-  const BlocBuilderPage();
+class BlocListenerPage extends StatefulWidget {
+  const BlocListenerPage();
 
   @override
-  State<BlocBuilderPage> createState() => _BlocBuilderPageState();
+  State<BlocListenerPage> createState() => _BlocListenerPageState();
 }
 
-class _BlocBuilderPageState extends State<BlocBuilderPage> {
+class _BlocListenerPageState extends State<BlocListenerPage> {
   late NavigationCubit navigationCubit;
+  late BlocListenerBloc blocListenerBloc;
 
   @override
   void initState() {
     super.initState();
     navigationCubit = context.read<NavigationCubit>();
+    blocListenerBloc = BlocListenerBloc(const BlocListenerState(0, false));
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      StopwatchUtils().stop(key: 'bloc_builder');
+      StopwatchUtils().stop(key: 'bloc_listener');
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final BlocBuilderBloc blocBuilderBloc = BlocBuilderBloc(const BlocBuilderState(0, false));
-    StopwatchUtils().start(key: 'bloc_builder', description: 'bloc_builder');
+    StopwatchUtils().start(key: 'bloc_listener', description: 'bloc_listener');
     final Scaffold scaffold = Scaffold(
       appBar: AppBar(
-        title: const Text('Bloc Builder Page'),
+        title: const Text('Bloc Listener Page'),
       ),
       body: WillPopScope(
         onWillPop: onWillPop,
-        child: BlocProvider<BlocBuilderBloc>(
-          create: (_) => blocBuilderBloc,
-          child: BlocBuilder<BlocBuilderBloc, BlocBuilderState>(
-            bloc: blocBuilderBloc,
-            builder: (BuildContext context, BlocBuilderState state) {
-              return BlocBuilderCounterContent();
+        child: BlocProvider<BlocListenerBloc>(
+          create: (_) => blocListenerBloc,
+          child: BlocListener<BlocListenerBloc, BlocListenerState>(
+            bloc: blocListenerBloc,
+            listener: (BuildContext context, BlocListenerState state) {
+              if (!state.isTimerActive) {
+                setState(() {});
+              }
             },
+            child: BlocListenerCounterContent(),
           ),
         ),
       ),

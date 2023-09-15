@@ -1,33 +1,10 @@
+import 'package:clean_app/pages/stateful_widget_page/third_stateful_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:unclean_app/pages/stateful_widget_page/third_stateful_widget.dart';
 
-class SecondStatefulWidget extends StatefulWidget {
+class SecondStatelessWidget extends StatelessWidget {
   final int number;
 
-  const SecondStatefulWidget({required this.number});
-
-  @override
-  _SecondStatefulWidgetState createState() => _SecondStatefulWidgetState();
-}
-
-class _SecondStatefulWidgetState extends State<SecondStatefulWidget> {
-  late int number;
-
-  @override
-  void initState() {
-    super.initState();
-    number = widget.number;
-  }
-
-  @override
-  void didUpdateWidget(covariant SecondStatefulWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if(widget.number != oldWidget.number) {
-      setState(() {
-        number = widget.number;
-      });
-    }
-  }
+  const SecondStatelessWidget({required this.number});
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +14,8 @@ class _SecondStatefulWidgetState extends State<SecondStatefulWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const SizedBox(height: 80, child: Center(child: Text('To jest drugi zagnieżdżony StatefulWidget'))),
-            ThirdStatefulWidget(number: number),
+            const SizedBox(height: 80, child: Center(child: Text('To jest drugi zagnieżdżony StatelessWidget'))),
+            ThirdStatelessWidget(number: number),
           ],
         ),
       ),

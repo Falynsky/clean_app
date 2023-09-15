@@ -1,5 +1,5 @@
+import 'package:clean_app/configs/transaction.dart';
 import 'package:flutter/material.dart';
-import 'package:unclean_app/configs/transaction.dart';
 
 class TransactionPreview extends StatefulWidget {
   final Transaction transaction;

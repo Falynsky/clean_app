@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:unclean_app/configs/transaction.dart';
-import 'package:unclean_app/enums/transaction_name_enum_extension.dart';
+import 'package:clean_app/configs/transaction.dart';
+import 'package:clean_app/enums/transaction_name_enum_extension.dart';
 
 class TransactionService {
   List<Transaction> fetchTransactions(int transactionSize) {

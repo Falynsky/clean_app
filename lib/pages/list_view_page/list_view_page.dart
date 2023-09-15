@@ -1,21 +1,21 @@
+import 'package:clean_app/bloc/list_view_bloc/list_view_bloc.dart';
+import 'package:clean_app/bloc/list_view_bloc/list_view_event.dart';
+import 'package:clean_app/bloc/list_view_bloc/list_view_state.dart';
+import 'package:clean_app/cubit/navigation_cubit/navigation_cubit.dart';
+import 'package:clean_app/enums/navigation_screens_enum.dart';
+import 'package:clean_app/pages/list_view_page/list_view_card_list.dart';
+import 'package:clean_app/utils/stopwatch_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unclean_app/bloc/list_view_bloc/list_view_bloc.dart';
-import 'package:unclean_app/bloc/list_view_bloc/list_view_event.dart';
-import 'package:unclean_app/bloc/list_view_bloc/list_view_state.dart';
-import 'package:unclean_app/cubit/navigation_cubit/navigation_cubit.dart';
-import 'package:unclean_app/enums/navigation_screens_enum.dart';
-import 'package:unclean_app/pages/list_view_page/list_view_card_list.dart';
-import 'package:unclean_app/utils/stopwatch_utils.dart';
 
-class ListViewPage extends StatefulWidget {
-  const ListViewPage({Key? key}) : super(key: key);
+class ListViewBuilderPage extends StatefulWidget {
+  const ListViewBuilderPage({Key? key}) : super(key: key);
 
   @override
-  State<ListViewPage> createState() => _ListViewPageState();
+  State<ListViewBuilderPage> createState() => _ListViewBuilderPageState();
 }
 
-class _ListViewPageState extends State<ListViewPage> {
+class _ListViewBuilderPageState extends State<ListViewBuilderPage> {
   late NavigationCubit navigationCubit;
   late final TransactionsBloc transactionsBloc;
   late final StopwatchUtils scrollToBottomStopwatchUtils;
@@ -46,6 +46,9 @@ class _ListViewPageState extends State<ListViewPage> {
   void _onPressed() {
     if (scrollController.offset >= scrollController.position.maxScrollExtent && !scrollController.position.outOfRange) {
       scrollToBottomStopwatchUtils.start(key: 'jump_timer_up', description: 'Time to jump up:');
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        StopwatchUtils().stop(key: 'jump_timer_up');
+      });
       scrollController.jumpTo(scrollController.position.minScrollExtent);
     } else {
       scrollToBottomStopwatchUtils.start(key: 'jump_timer_down', description: 'Time to jump down:');
@@ -77,7 +80,7 @@ class _ListViewPageState extends State<ListViewPage> {
               if (state is TransactionsInitial) {
                 transactionsBloc.add(LoadTransactionsEvent());
               } else if (state is TransactionsLoadedState) {
-                return ListViewCardList(scrollController: scrollController);
+                return ListViewBuilderCardList(scrollController: scrollController);
               }
               return const Center(child: CircularProgressIndicator());
             },

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:unclean_app/utils/stopwatch_utils.dart';
+import 'package:clean_app/utils/stopwatch_utils.dart';
 
 class TestListConfig extends Equatable {
   final String name;

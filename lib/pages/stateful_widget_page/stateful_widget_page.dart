@@ -1,38 +1,26 @@
+import 'package:clean_app/cubit/navigation_cubit/navigation_cubit.dart';
+import 'package:clean_app/enums/navigation_screens_enum.dart';
+import 'package:clean_app/pages/stateful_widget_page/first_stateful_widget.dart';
+import 'package:clean_app/utils/stopwatch_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unclean_app/cubit/navigation_cubit/navigation_cubit.dart';
-import 'package:unclean_app/enums/navigation_screens_enum.dart';
-import 'package:unclean_app/pages/stateful_widget_page/first_stateful_widget.dart';
-import 'package:unclean_app/utils/stopwatch_utils.dart';
 
-class SatefulWidgetPage extends StatefulWidget {
-  const SatefulWidgetPage({
+class StatelessWidgetPage extends StatelessWidget {
+  const StatelessWidgetPage({
     super.key,
   });
 
   @override
-  State<SatefulWidgetPage> createState() => _SatefulWidgetPageState();
-}
-
-class _SatefulWidgetPageState extends State<SatefulWidgetPage> {
-  late NavigationCubit navigationCubit;
-
-  @override
-  void initState() {
-    super.initState();
-    navigationCubit = context.read<NavigationCubit>();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final StopwatchUtils stopwatchUtils = StopwatchUtils();
+    final NavigationCubit navigationCubit = context.read<NavigationCubit>();
     stopwatchUtils..start(key: 'sateful_widget_page');
     final Widget widget = Scaffold(
-      appBar:  AppBar(
+      appBar: AppBar(
         title: const Text('Stateful Widget Page'),
       ),
       body: WillPopScope(
-        onWillPop: onWillPop,
+        onWillPop: () => onWillPop(navigationCubit),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -79,7 +67,7 @@ class _SatefulWidgetPageState extends State<SatefulWidgetPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    FirstStatefulWidget(),
+                    OnlyStatefulWidget(),
                   ],
                 ),
               ),
@@ -92,7 +80,7 @@ class _SatefulWidgetPageState extends State<SatefulWidgetPage> {
     return widget;
   }
 
-  Future<bool> onWillPop() async {
+  Future<bool> onWillPop(NavigationCubit navigationCubit) async {
     navigationCubit.navigate(NavigationScreens.home);
     return false;
   }
