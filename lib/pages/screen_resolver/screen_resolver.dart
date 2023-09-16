@@ -2,9 +2,11 @@ import 'package:clean_app/cubit/navigation_cubit/navigation_cubit.dart';
 import 'package:clean_app/cubit/navigation_cubit/navigation_state.dart';
 import 'package:clean_app/enums/navigation_screens_enum.dart';
 import 'package:clean_app/pages/bloc_builder/bloc_builder_page.dart';
+import 'package:clean_app/pages/bloc_with_stateful_widget_page/bloc_with_stateful_widget_page.dart';
 import 'package:clean_app/pages/home_page/home_page.dart';
-import 'package:clean_app/pages/justStatefulWidgetPage/just_stateful_widget_page.dart';
 import 'package:clean_app/pages/list_view_page/list_view_page.dart';
+import 'package:clean_app/pages/paddings_page/paddings_page.dart';
+import 'package:clean_app/pages/providers_page/providers_page.dart';
 import 'package:clean_app/pages/sized_box_page/sized_box_page.dart';
 import 'package:clean_app/pages/stateful_widget_page/stateful_widget_page.dart';
 import 'package:flutter/material.dart';
@@ -47,9 +49,13 @@ class _ScreenResolverState extends State<ScreenResolver> {
           } else if (state.currentScreen == NavigationScreens.blocListener) {
             return const BlocListenerPage();
           } else if (state.currentScreen == NavigationScreens.container) {
-            return SizedBoxPage();
+            return ContainerPage();
+          } else if (state.currentScreen == NavigationScreens.paddings) {
+            return PaddingsPage();
           } else if (state.currentScreen == NavigationScreens.blocWithStatefulWidget) {
-            return const JustStatefulWidgetPage();
+            return const BlocWithStatefulWidgetPage();
+          } else if (state.currentScreen == NavigationScreens.provider) {
+            return const ProvidersPage();
           } else {
             return InkWell(
               onTap: () => navigationCubit.navigate(NavigationScreens.home),

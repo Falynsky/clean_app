@@ -56,12 +56,20 @@ class _HomePageState extends State<HomePage> {
                   onTap: () => navigationCubit.navigate(NavigationScreens.blocListener),
                 ),
                 ScreenButton(
-                  caption: '4./5. SizedBox',
+                  caption: '4. ContainerPage',
                   onTap: () => navigationCubit.navigate(NavigationScreens.container),
                 ),
                 ScreenButton(
-                  caption: '10./11. widget with BLoC',
+                  caption: '5. PaddingsPage',
+                  onTap: () => navigationCubit.navigate(NavigationScreens.paddings),
+                ),
+                ScreenButton(
+                  caption: '10. widget with BLoC',
                   onTap: () => navigationCubit.navigate(NavigationScreens.blocWithStatefulWidget),
+                ),
+                ScreenButton(
+                  caption: '11. provider',
+                  onTap: () => navigationCubit.navigate(NavigationScreens.provider),
                 ),
               ],
             ),

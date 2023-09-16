@@ -4,25 +4,13 @@ import 'package:clean_app/utils/stopwatch_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ContainerPage extends StatefulWidget {
+class PaddingsPage extends StatelessWidget {
   @override
-  State<StatefulWidget> createState() => _ContainerPageState();
-}
-
-class _ContainerPageState extends State<ContainerPage> {
-  late NavigationCubit navigationCubit;
-
-  @override
-  void initState() {
-    super.initState();
-    navigationCubit = context.read<NavigationCubit>();
+  Widget build(BuildContext context) {
+    final NavigationCubit navigationCubit = context.read<NavigationCubit>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       StopwatchUtils().stop(key: 'container_page_draw');
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     StopwatchUtils().start(key: 'container_page_constructor');
     StopwatchUtils().start(key: 'container_page_draw');
     final Scaffold scaffold = Scaffold(
@@ -30,11 +18,15 @@ class _ContainerPageState extends State<ContainerPage> {
         title: const Text('SizedBox'),
       ),
       body: WillPopScope(
-        onWillPop: onWillPop,
+        onWillPop: () => onWillPop(navigationCubit),
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              for (int i = 0; i < 10000; i++) i.isEven ? Container(height: 10) : const Text('test'),
+              for (int i = 0; i < 10000; i++)
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5),
+                  child: Text('test'),
+                ),
             ],
           ),
         ),
@@ -44,7 +36,7 @@ class _ContainerPageState extends State<ContainerPage> {
     return scaffold;
   }
 
-  Future<bool> onWillPop() async {
+  Future<bool> onWillPop(NavigationCubit navigationCubit) async {
     navigationCubit.navigate(NavigationScreens.home);
     return false;
   }

@@ -28,39 +28,41 @@ class _ListViewBuilderPageState extends State<ListViewBuilderPage> {
     transactionsBloc = TransactionsBloc();
     scrollToBottomStopwatchUtils = StopwatchUtils();
     scrollController.addListener(() {
-      if (scrollController.offset >= scrollController.position.maxScrollExtent &&
-          !scrollController.position.outOfRange) {
-        scrollToBottomStopwatchUtils.stop(key: 'jump_timer_down');
-      }
-      if (scrollController.offset <= scrollController.position.minScrollExtent &&
-          !scrollController.position.outOfRange) {
-        scrollToBottomStopwatchUtils.stop(key: 'jump_timer_up');
+      final ScrollPosition position = scrollController.position;
+      if (position.atEdge && position.pixels == position.maxScrollExtent && !position.outOfRange) {
+        scrollToBottomStopwatchUtils.stop(key: 'scroll_timer_down');
+      } else if (position.atEdge && position.pixels == position.minScrollExtent && !position.outOfRange) {
+        scrollToBottomStopwatchUtils.stop(key: 'scroll_timer_up');
       }
     });
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      StopwatchUtils().stop(key: 'transaction_page_draw');
+      StopwatchUtils().stop(key: 'list_view_page_draw');
     });
   }
 
   void _onPressed() {
     if (scrollController.offset >= scrollController.position.maxScrollExtent && !scrollController.position.outOfRange) {
-      scrollToBottomStopwatchUtils.start(key: 'jump_timer_up', description: 'Time to jump up:');
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        StopwatchUtils().stop(key: 'jump_timer_up');
-      });
-      scrollController.jumpTo(scrollController.position.minScrollExtent);
+      scrollToBottomStopwatchUtils.start(key: 'scroll_timer_up', description: 'Time to scroll up:');
+      scrollController.animateTo(
+        scrollController.position.minScrollExtent,
+        duration: const Duration(seconds: 1),
+        curve: Curves.easeOut,
+      );
     } else {
-      scrollToBottomStopwatchUtils.start(key: 'jump_timer_down', description: 'Time to jump down:');
-      scrollController.jumpTo(scrollController.position.maxScrollExtent);
+      scrollToBottomStopwatchUtils.start(key: 'scroll_timer_down', description: 'Time to scroll down:');
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(seconds: 1),
+        curve: Curves.easeOut,
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final StopwatchUtils stopwatchUtils = StopwatchUtils();
-    stopwatchUtils..start(key: 'transaction_page_draw');
-    stopwatchUtils..start(key: 'transaction_page');
+    stopwatchUtils..start(key: 'list_view_page_draw');
+    stopwatchUtils..start(key: 'list_view_page_constructor');
     final Widget widget = Scaffold(
       appBar: AppBar(
         title: const Text('ListView Page'),
@@ -88,7 +90,7 @@ class _ListViewBuilderPageState extends State<ListViewBuilderPage> {
         ),
       ),
     );
-    stopwatchUtils..stop(key: 'transaction_page');
+    stopwatchUtils..stop(key: 'list_view_page_constructor');
     return widget;
   }
 
