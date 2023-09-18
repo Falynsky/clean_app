@@ -23,8 +23,8 @@ class _ContainerPageState extends State<ContainerPage> {
 
   @override
   Widget build(BuildContext context) {
-    StopwatchUtils().start(key: 'container_page_constructor');
     StopwatchUtils().start(key: 'container_page_draw');
+    StopwatchUtils().start(key: 'container_page');
     final Scaffold scaffold = Scaffold(
       appBar: AppBar(
         title: const Text('SizedBox'),
@@ -40,7 +40,7 @@ class _ContainerPageState extends State<ContainerPage> {
         ),
       ),
     );
-    StopwatchUtils().stop(key: 'container_page_constructor');
+    StopwatchUtils().stop(key: 'container_page');
     return scaffold;
   }
 

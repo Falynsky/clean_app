@@ -24,6 +24,7 @@ class _BlocWithStatefulWidgetPageState extends State<BlocWithStatefulWidgetPage>
     super.initState();
     navigationCubit = context.read<NavigationCubit>();
     blocWithStatefulWidgetBloc = BlocWithStatefulWidgetBloc(const BlocWithStatefulWidgetState(''));
+    StopwatchUtils().start(key: 'bloc_with_stateful_widget_page_draw');
     WidgetsBinding.instance.addPostFrameCallback((_) {
       StopwatchUtils().stop(key: 'bloc_with_stateful_widget_page_draw');
     });
@@ -31,8 +32,8 @@ class _BlocWithStatefulWidgetPageState extends State<BlocWithStatefulWidgetPage>
 
   @override
   Widget build(BuildContext context) {
-    StopwatchUtils().start(key: 'bloc_with_stateful_widget_page_draw');
-    return Scaffold(
+    StopwatchUtils().start(key: 'bloc_with_stateful_widget_page');
+    final Scaffold scaffold = Scaffold(
       appBar: AppBar(
         title: const Text('just_stateful_widget_page'),
       ),
@@ -48,10 +49,10 @@ class _BlocWithStatefulWidgetPageState extends State<BlocWithStatefulWidgetPage>
                     const Text('Naciśnij przycisk aby wyświetlić obecną godzinę'),
                     ElevatedButton(
                       onPressed: () {
+                        StopwatchUtils().start(key: 'bloc_with_stateful_widget_page_draw');
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           StopwatchUtils().stop(key: 'bloc_with_stateful_widget_page_draw');
                         });
-                        StopwatchUtils().start(key: 'bloc_with_stateful_widget_page_draw');
                         blocWithStatefulWidgetBloc.add(GetCurrentDate());
                       },
                       child: const Text('Pokaż godzinę'),
@@ -65,6 +66,8 @@ class _BlocWithStatefulWidgetPageState extends State<BlocWithStatefulWidgetPage>
         ),
       ),
     );
+    StopwatchUtils().stop(key: 'bloc_with_stateful_widget_page');
+    return scaffold;
   }
 
   Future<bool> onWillPop() async {

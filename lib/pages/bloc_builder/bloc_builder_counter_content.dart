@@ -17,32 +17,33 @@ class _BlocListenerCounterContentState extends State<BlocListenerCounterContent>
   void initState() {
     super.initState();
     blocBuilderBloc = context.read<BlocListenerBloc>();
-    StopwatchUtils().start(key: 'bloc_listener_counter_content');
+    StopwatchUtils().start(key: 'bloc_listener_counter_content_draw');
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      StopwatchUtils().stop(key: 'bloc_listener_counter_content');
+      StopwatchUtils().stop(key: 'bloc_listener_counter_content_draw');
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    StopwatchUtils().start(key: 'bloc_listener_counter_content');
+    final Container container = Container(
       child: Column(
         children: <Widget>[
           ButtonBar(
             children: <Widget>[
               ElevatedButton(
                 onPressed: () {
-                  StopwatchUtils().start(key: 'bloc_listener_counter_content');
                   blocBuilderBloc.add(StartTimer());
                 },
                 child: const Text('Włącz stoper'),
               ),
               ElevatedButton(
                 onPressed: () {
-                  blocBuilderBloc.add(StopTimer());
+                  StopwatchUtils().start(key: 'bloc_listener_counter_content_draw');
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    StopwatchUtils().stop(key: 'bloc_listener_counter_content');
+                    StopwatchUtils().stop(key: 'bloc_listener_counter_content_draw');
                   });
+                  blocBuilderBloc.add(StopTimer());
                 },
                 child: const Text('Wyłącz stoper i wyswietl'),
               ),
@@ -59,5 +60,7 @@ class _BlocListenerCounterContentState extends State<BlocListenerCounterContent>
         ],
       ),
     );
+    StopwatchUtils().stop(key: 'bloc_listener_counter_content');
+    return container;
   }
 }

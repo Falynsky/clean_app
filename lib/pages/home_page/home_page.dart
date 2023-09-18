@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
             child: ScreenButtonList(
               buttons: <Widget>[
                 ScreenButton(
-                  caption: '1./13. ListViewBuilder()',
+                  caption: '1. | 12. ListViewBuilder()',
                   onTap: () => navigationCubit.navigate(NavigationScreens.listViewBuilder),
                 ),
                 ScreenButton(

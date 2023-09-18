@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ScreenButton extends StatefulWidget {
+class ScreenButton extends StatelessWidget {
   final String caption;
   final GestureTapCallback onTap;
 
@@ -8,20 +8,6 @@ class ScreenButton extends StatefulWidget {
     required this.caption,
     required this.onTap,
   });
-
-  @override
-  State<ScreenButton> createState() => _ScreenButtonState();
-}
-
-class _ScreenButtonState extends State<ScreenButton> {
-  late final String caption;
-  late final GestureTapCallback onTap;
-  @override
-  void initState() {
-    super.initState();
-    caption = widget.caption;
-    onTap = widget.onTap;
-  }
 
   @override
   Widget build(BuildContext context) {

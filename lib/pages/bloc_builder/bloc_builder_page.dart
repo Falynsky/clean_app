@@ -24,13 +24,14 @@ class _BlocListenerPageState extends State<BlocListenerPage> {
     navigationCubit = context.read<NavigationCubit>();
     blocListenerBloc = BlocListenerBloc(const BlocListenerState(0, false));
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      StopwatchUtils().stop(key: 'bloc_listener');
+      StopwatchUtils().stop(key: 'bloc_listener_draw');
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    StopwatchUtils().start(key: 'bloc_listener', description: 'bloc_listener');
+    StopwatchUtils().start(key: 'bloc_listener_draw');
+    StopwatchUtils().start(key: 'bloc_listener');
     final Scaffold scaffold = Scaffold(
       appBar: AppBar(
         title: const Text('Bloc Listener Page'),
@@ -51,6 +52,7 @@ class _BlocListenerPageState extends State<BlocListenerPage> {
         ),
       ),
     );
+    StopwatchUtils().stop(key: 'bloc_listener');
     return scaffold;
   }
 

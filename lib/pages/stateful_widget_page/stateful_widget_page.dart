@@ -12,9 +12,12 @@ class StatelessWidgetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StopwatchUtils stopwatchUtils = StopwatchUtils();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      StopwatchUtils().stop(key: 'stateless_widget_page_draw');
+    });
     final NavigationCubit navigationCubit = context.read<NavigationCubit>();
-    stopwatchUtils..start(key: 'sateful_widget_page');
+    StopwatchUtils().start(key: 'stateless_widget_page');
+    StopwatchUtils().start(key: 'stateless_widget_page_draw');
     final Widget widget = Scaffold(
       appBar: AppBar(
         title: const Text('Stateful Widget Page'),
@@ -76,7 +79,7 @@ class StatelessWidgetPage extends StatelessWidget {
         ),
       ),
     );
-    stopwatchUtils..stop(key: 'sateful_widget_page');
+    StopwatchUtils().stop(key: 'stateless_widget_page');
     return widget;
   }
 

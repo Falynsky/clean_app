@@ -1,5 +1,4 @@
 class StopwatchUtils {
-
   static final Map<String, Stopwatch> _cache = <String, Stopwatch>{};
   static final Map<String, String> _cacheDescription = <String, String>{};
 
@@ -17,11 +16,11 @@ class StopwatchUtils {
   }
 
   int? stop({required String key}) {
-    final Stopwatch? stopwatch =_cache.remove(key);
+    final Stopwatch? stopwatch = _cache.remove(key);
     if (stopwatch == null) {
       return null;
     }
-    final String description = _cacheDescription[key] ?? 'test';
+    final String description = _cacheDescription.remove(key) ?? 'test';
     final int elapsedMilliseconds = stopwatch.elapsedMilliseconds;
     final int elapsedMicroseconds = stopwatch.elapsedMicroseconds;
     print('$description $elapsedMilliseconds ms / $elapsedMicroseconds μs');

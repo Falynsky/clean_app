@@ -18,7 +18,6 @@ class ListViewBuilderPage extends StatefulWidget {
 class _ListViewBuilderPageState extends State<ListViewBuilderPage> {
   late NavigationCubit navigationCubit;
   late final TransactionsBloc transactionsBloc;
-  late final StopwatchUtils scrollToBottomStopwatchUtils;
   final ScrollController scrollController = ScrollController();
 
   @override
@@ -26,13 +25,12 @@ class _ListViewBuilderPageState extends State<ListViewBuilderPage> {
     super.initState();
     navigationCubit = context.read<NavigationCubit>();
     transactionsBloc = TransactionsBloc();
-    scrollToBottomStopwatchUtils = StopwatchUtils();
     scrollController.addListener(() {
       final ScrollPosition position = scrollController.position;
       if (position.atEdge && position.pixels == position.maxScrollExtent && !position.outOfRange) {
-        scrollToBottomStopwatchUtils.stop(key: 'scroll_timer_down');
+        StopwatchUtils().stop(key: 'scroll_timer_down');
       } else if (position.atEdge && position.pixels == position.minScrollExtent && !position.outOfRange) {
-        scrollToBottomStopwatchUtils.stop(key: 'scroll_timer_up');
+        StopwatchUtils().stop(key: 'scroll_timer_up');
       }
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -41,15 +39,19 @@ class _ListViewBuilderPageState extends State<ListViewBuilderPage> {
   }
 
   void _onPressed() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      StopwatchUtils().stop(key: 'scroll_draw');
+    });
+    StopwatchUtils().start(key: 'scroll_draw', description: 'Time to render scroll:');
     if (scrollController.offset >= scrollController.position.maxScrollExtent && !scrollController.position.outOfRange) {
-      scrollToBottomStopwatchUtils.start(key: 'scroll_timer_up', description: 'Time to scroll up:');
+      StopwatchUtils().start(key: 'scroll_timer_up', description: 'Time to scroll up:');
       scrollController.animateTo(
         scrollController.position.minScrollExtent,
         duration: const Duration(seconds: 1),
         curve: Curves.easeOut,
       );
     } else {
-      scrollToBottomStopwatchUtils.start(key: 'scroll_timer_down', description: 'Time to scroll down:');
+      StopwatchUtils().start(key: 'scroll_timer_down', description: 'Time to scroll down:');
       scrollController.animateTo(
         scrollController.position.maxScrollExtent,
         duration: const Duration(seconds: 1),
@@ -60,9 +62,8 @@ class _ListViewBuilderPageState extends State<ListViewBuilderPage> {
 
   @override
   Widget build(BuildContext context) {
-    final StopwatchUtils stopwatchUtils = StopwatchUtils();
-    stopwatchUtils..start(key: 'list_view_page_draw');
-    stopwatchUtils..start(key: 'list_view_page_constructor');
+    StopwatchUtils().start(key: 'list_view_page_draw');
+    StopwatchUtils().start(key: 'list_view_page');
     final Widget widget = Scaffold(
       appBar: AppBar(
         title: const Text('ListView Page'),
@@ -90,7 +91,7 @@ class _ListViewBuilderPageState extends State<ListViewBuilderPage> {
         ),
       ),
     );
-    stopwatchUtils..stop(key: 'list_view_page_constructor');
+    StopwatchUtils().stop(key: 'list_view_page');
     return widget;
   }
 

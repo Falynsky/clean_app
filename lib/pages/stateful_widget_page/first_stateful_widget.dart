@@ -63,9 +63,9 @@ class _OnlyStatefulWidgetState extends State<OnlyStatefulWidget> {
 
   void _incrementCounter() {
     number = Random().nextInt(100);
-    StopwatchUtils().start(key: 'losoj_numer_rebuild');
+    StopwatchUtils().start(key: 'first_stateful_widget_draw');
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      StopwatchUtils().stop(key: 'only_stateful_widget_draw');
+      StopwatchUtils().stop(key: 'first_stateful_widget_draw');
     });
     setState(() {});
   }
