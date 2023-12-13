@@ -12,7 +12,8 @@ class ProvidersPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<TestProvider>(
       builder: (_, TestProvider provider, __) {
-        return Container(
+        StopwatchUtils().start(key: 'providers_page_content');
+        final Container container = Container(
           child: Center(
             child: Column(
               children: <Widget>[
@@ -32,6 +33,8 @@ class ProvidersPageContent extends StatelessWidget {
             ),
           ),
         );
+        StopwatchUtils().stop(key: 'providers_page_content');
+        return container;
       },
     );
   }

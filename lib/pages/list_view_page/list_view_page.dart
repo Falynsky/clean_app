@@ -47,14 +47,14 @@ class _ListViewBuilderPageState extends State<ListViewBuilderPage> {
       StopwatchUtils().start(key: 'scroll_timer_up', description: 'Time to scroll up:');
       scrollController.animateTo(
         scrollController.position.minScrollExtent,
-        duration: const Duration(seconds: 1),
+        duration: const Duration(milliseconds: 1),
         curve: Curves.easeOut,
       );
     } else {
       StopwatchUtils().start(key: 'scroll_timer_down', description: 'Time to scroll down:');
       scrollController.animateTo(
         scrollController.position.maxScrollExtent,
-        duration: const Duration(seconds: 1),
+        duration: const Duration(milliseconds: 1),
         curve: Curves.easeOut,
       );
     }

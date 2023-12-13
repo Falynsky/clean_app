@@ -23,13 +23,13 @@ class _BlocListenerPageState extends State<BlocListenerPage> {
     super.initState();
     navigationCubit = context.read<NavigationCubit>();
     blocListenerBloc = BlocListenerBloc(const BlocListenerState(0, false));
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      StopwatchUtils().stop(key: 'bloc_listener_draw');
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      StopwatchUtils().stop(key: 'bloc_listener_draw');
+    });
     StopwatchUtils().start(key: 'bloc_listener_draw');
     StopwatchUtils().start(key: 'bloc_listener');
     final Scaffold scaffold = Scaffold(

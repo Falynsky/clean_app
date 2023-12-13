@@ -1,4 +1,5 @@
 import 'package:clean_app/bloc/list_view_bloc/list_view_bloc.dart';
+import 'package:clean_app/configs/transaction.dart';
 import 'package:clean_app/cubit/navigation_cubit/navigation_cubit.dart';
 import 'package:clean_app/enums/navigation_screens_enum.dart';
 import 'package:clean_app/pages/list_view_page/list_view_card.dart';
@@ -29,6 +30,7 @@ class _ListViewBuilderCardListState extends State<ListViewBuilderCardList> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Transaction> transactions = transactionsBloc.transactions;
     return Container(
       child: Column(
         children: <Widget>[
@@ -38,12 +40,12 @@ class _ListViewBuilderCardListState extends State<ListViewBuilderCardList> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: transactionsBloc.transactions.length,
+              itemCount: transactions.length,
               controller: scrollController,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   child: ListViewCard(
-                    transaction: transactionsBloc.transactions[index],
+                    transaction: transactions[index],
                   ),
                 );
               },

@@ -16,7 +16,8 @@ class ProvidersPage extends StatelessWidget {
       StopwatchUtils().stop(key: 'providers_page_draw');
     });
     StopwatchUtils().start(key: 'providers_page_draw');
-    return Scaffold(
+    StopwatchUtils().start(key: 'providers_page');
+    final Scaffold scaffold = Scaffold(
       appBar: AppBar(
         title: const Text('just_stateful_widget_page'),
       ),
@@ -28,6 +29,8 @@ class ProvidersPage extends StatelessWidget {
         ),
       ),
     );
+    StopwatchUtils().stop(key: 'providers_page');
+    return scaffold;
   }
 
   Future<bool> onWillPop(NavigationCubit navigationCubit) async {
